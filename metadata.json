@@ -1,0 +1,6 @@
+{
+  "name": "Gestante Organizada - Plano Personalizado",
+  "description": "Experiência premium e personalizada para montagem do plano de enxoval e organização da gestação.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

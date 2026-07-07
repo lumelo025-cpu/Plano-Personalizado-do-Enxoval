@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium soft lavender, rose and warm colors */
+  --color-brand-50: #fbf9ff;
+  --color-brand-100: #f5f0ff;
+  --color-brand-200: #ebdfff;
+  --color-brand-300: #d6bfff;
+  --color-brand-400: #b58fff;
+  --color-brand-500: #935fff;
+  --color-brand-600: #793bf0;
+  --color-brand-700: #622ad1;
+  --color-brand-800: #5122ab;
+  --color-brand-900: #421c8f;
+
+  --color-neutral-warm-50: #fdfdfc;
+  --color-neutral-warm-100: #f7f6f3;
+  --color-neutral-warm-200: #efede8;
+  --color-neutral-warm-300: #dfdbd3;
+  --color-neutral-warm-400: #bab3a5;
+  --color-neutral-warm-500: #8f8676;
+  --color-neutral-warm-600: #706859;
+  --color-neutral-warm-700: #544e43;
+  --color-neutral-warm-800: #3c3730;
+  --color-neutral-warm-900: #272420;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-warm-50 text-neutral-warm-900 font-sans antialiased;
+  }
+}
