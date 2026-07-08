@@ -32,22 +32,25 @@ const PROGRESS_MAP: Record<StepId, number> = {
   trimester_msg: 10,
   first_baby_q: 15,
   first_baby_msg: 20,
-  due_date_q: 25,
+  edu_reality: 24,
+  due_date_q: 28,
   due_date_msg: 32,
-  state_q: 38,
-  state_msg: 45,
+  edu_intelligent_spending: 36,
+  state_q: 40,
+  state_msg: 44,
+  edu_climate_regional: 48,
   twins_q: 52,
-  laundry_q: 58,
-  dryer_q: 64,
-  info_gen_list: 70,
-  info_clothes_waste: 73,
-  info_quantity_waste: 76,
-  concern_q: 80,
-  concern_msg: 85,
-  started_buying_q: 88,
-  prenatal_organize_q: 92,
-  spending_control_q: 95,
-  baby_name_q: 98,
+  laundry_q: 56,
+  dryer_q: 60,
+  edu_size_waste: 65,
+  concern_q: 70,
+  concern_msg: 74,
+  started_buying_q: 78,
+  edu_buy_right: 82,
+  prenatal_organize_q: 86,
+  spending_control_q: 90,
+  baby_name_q: 94,
+  edu_planning_benefits: 97,
   connection_msg: 99,
   processing: 100,
   diagnosis: 100,
@@ -131,6 +134,26 @@ export default function App() {
     );
   }, [state.birthState]);
 
+  // Live feedback message mapper
+  const liveFeedbackMessage = useMemo(() => {
+    if (['due_date_q', 'due_date_msg'].includes(currentStep)) {
+      return "Estamos adaptando sua lista para a estação do nascimento.";
+    }
+    if (['state_q', 'state_msg'].includes(currentStep)) {
+      return "Personalizando seu enxoval conforme sua região.";
+    }
+    if (['laundry_q', 'dryer_q'].includes(currentStep)) {
+      return "Calculando quantidades mais adequadas para sua rotina.";
+    }
+    if (['concern_q', 'concern_msg', 'started_buying_q'].includes(currentStep)) {
+      return "Identificando oportunidades para evitar desperdícios.";
+    }
+    if (['prenatal_organize_q', 'spending_control_q', 'baby_name_q'].includes(currentStep)) {
+      return "Organizando tudo para reduzir compras desnecessárias.";
+    }
+    return null;
+  }, [currentStep]);
+
   return (
     <div className="min-h-screen bg-neutral-warm-50 flex flex-col font-sans select-none" id="main-app-layout">
       {/* Premium subtle header navigation */}
@@ -142,6 +165,19 @@ export default function App() {
       />
 
       <main className="flex-1 flex flex-col items-center justify-center py-6 px-4 md:px-6 max-w-2xl mx-auto w-full">
+        {liveFeedbackMessage && (
+          <motion.div
+            key={liveFeedbackMessage}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="mb-6 bg-brand-50/85 border border-brand-100/70 px-4 py-2 rounded-full flex items-center justify-center gap-2 text-brand-700 text-xs font-semibold font-mono text-center max-w-md w-full shadow-sm"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-brand-500 animate-pulse" />
+            <span>{liveFeedbackMessage}</span>
+          </motion.div>
+        )}
+
         <AnimatePresence mode="wait">
           
           {/* FASE 1 - TELA 1 (Boas-vindas) */}
@@ -154,10 +190,13 @@ export default function App() {
               className="text-center max-w-md w-full flex flex-col gap-6"
               id="step-welcome"
             >
-              <div className="flex justify-center mb-2">
-                <div className="w-16 h-16 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 animate-bounce">
-                  <Baby className="w-8 h-8" />
-                </div>
+              <div className="w-full h-48 md:h-56 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  alt="Gestante Feliz"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               
               <h1 className="font-serif text-3xl md:text-4xl font-bold text-neutral-warm-900 leading-tight">
@@ -195,8 +234,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-trimester-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80"
+                  alt="Ultrassom"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 1 — Seu Momento</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 1 — Seu Momento</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Em que fase da gestação você está?
                 </h2>
@@ -267,8 +315,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-first-baby-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80"
+                  alt="Preparando o quartinho"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 1 — Experiência</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 1 — Experiência</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   É seu primeiro bebê?
                 </h2>
@@ -323,7 +380,7 @@ export default function App() {
               <button
                 type="button"
                 id="first-baby-msg-continue"
-                onClick={() => goTo('due_date_q')}
+                onClick={() => goTo('edu_reality')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -341,8 +398,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-due-date-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  alt="Bebê dormindo"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 2 — Personalização</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 2 — Personalização</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Qual a data prevista do parto?
                 </h2>
@@ -389,7 +455,7 @@ export default function App() {
               <button
                 type="button"
                 id="due-date-msg-continue"
-                onClick={() => goTo('state_q')}
+                onClick={() => goTo('edu_intelligent_spending')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -407,8 +473,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-state-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1596870230551-612f3c517ac0?auto=format&fit=crop&w=600&q=80"
+                  alt="Detalhes do enxoval"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 2 — Região</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 2 — Região</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Em qual estado seu bebê vai nascer?
                 </h2>
@@ -447,7 +522,7 @@ export default function App() {
               <button
                 type="button"
                 id="state-msg-continue"
-                onClick={() => goTo('twins_q')}
+                onClick={() => goTo('edu_climate_regional')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -465,8 +540,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-twins-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&w=600&q=80"
+                  alt="Brinquedos infantis"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 2 — Quantidades</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 2 — Quantidades</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você está esperando:
                 </h2>
@@ -509,8 +593,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-laundry-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80"
+                  alt="Roupas de bebê organizadas"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 2 — Rotina</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 2 — Rotina</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Com que frequência você costuma lavar roupas?
                 </h2>
@@ -555,8 +648,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-dryer-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80"
+                  alt="Secadora e roupas macias"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 2 — Lavanderia</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 2 — Lavanderia</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você possui secadora?
                 </h2>
@@ -570,7 +672,7 @@ export default function App() {
                   type="button"
                   onClick={() => {
                     updateState({ hasDryer: true });
-                    goTo('info_gen_list');
+                    goTo('edu_size_waste');
                   }}
                   className="p-6 rounded-2xl border border-neutral-warm-200/80 bg-white hover:border-brand-400 hover:bg-brand-50/30 transition-all font-medium text-base text-neutral-warm-800 cursor-pointer shadow-sm flex flex-col items-center gap-3"
                 >
@@ -581,7 +683,7 @@ export default function App() {
                   type="button"
                   onClick={() => {
                     updateState({ hasDryer: false });
-                    goTo('info_gen_list');
+                    goTo('edu_size_waste');
                   }}
                   className="p-6 rounded-2xl border border-neutral-warm-200/80 bg-white hover:border-brand-400 hover:bg-brand-50/30 transition-all font-medium text-base text-neutral-warm-800 cursor-pointer shadow-sm flex flex-col items-center gap-3"
                 >
@@ -592,34 +694,39 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* FASE 3 - TELA 9 (Você sabia?) */}
-          {currentStep === 'info_gen_list' && (
+          {/* EDU 1 (Você sabia? O maior erro...) */}
+          {currentStep === 'edu_reality' && (
             <motion.div
-              key="info_gen_list"
+              key="edu_reality"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               className="text-center max-w-md w-full flex flex-col gap-6"
-              id="step-info-gen-list"
+              id="step-edu-reality"
             >
-              <div className="w-14 h-14 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-2 font-serif text-2xl font-bold">
-                💡
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  alt="Gestante Feliz"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                Você sabia?
+                💜 Você sabia?
               </h3>
               <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
                 <p>
-                  Um bebê que nasce no verão pode precisar de um enxoval completamente diferente de outro que nasce durante o inverno.
+                  O maior erro na montagem do enxoval não é comprar pouco.
                 </p>
-                <p className="font-semibold text-neutral-warm-800">
-                  Por isso listas genéricas encontradas na internet raramente servem para todas as famílias e causam desperdício.
+                <p className="font-semibold text-neutral-warm-800 text-base">
+                  É comprar sem considerar a realidade do seu bebê.
                 </p>
               </div>
               <button
                 type="button"
-                id="info-gen-list-continue"
-                onClick={() => goTo('info_clothes_waste')}
+                id="edu-reality-continue"
+                onClick={() => goTo('due_date_q')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -627,18 +734,103 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* FASE 3 - TELA 10 (Você sabia? Tamanho RN e P) */}
-          {currentStep === 'info_clothes_waste' && (
+          {/* EDU 2 (Um enxoval inteligente...) */}
+          {currentStep === 'edu_intelligent_spending' && (
             <motion.div
-              key="info_clothes_waste"
+              key="edu_intelligent_spending"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               className="text-center max-w-md w-full flex flex-col gap-6"
-              id="step-info-clothes-waste"
+              id="step-edu-intelligent-spending"
             >
-              <div className="w-14 h-14 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-2 font-serif text-2xl font-bold">
-                👚
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80"
+                  alt="Controle financeiro"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
+                💜 Um enxoval inteligente não significa gastar mais.
+              </h3>
+              <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
+                <p>
+                  Significa comprar apenas aquilo que realmente será utilizado.
+                </p>
+                <p className="font-semibold text-neutral-warm-800">
+                  Isso evita desperdícios e deixa você muito mais tranquila durante toda a gestação.
+                </p>
+              </div>
+              <button
+                type="button"
+                id="edu-intelligent-spending-continue"
+                onClick={() => goTo('state_q')}
+                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
+              >
+                Continuar
+              </button>
+            </motion.div>
+          )}
+
+          {/* EDU 3 (Você sabia? Julho no Sul...) */}
+          {currentStep === 'edu_climate_regional' && (
+            <motion.div
+              key="edu_climate_regional"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              className="text-center max-w-md w-full flex flex-col gap-6"
+              id="step-edu-climate-regional"
+            >
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1440492248262-689579da82fc?auto=format&fit=crop&w=600&q=80"
+                  alt="Roupas de bebê no cabide"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
+                Você sabia?
+              </h3>
+              <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
+                <p>
+                  Um bebê que nasce em julho no Sul pode precisar de um enxoval completamente diferente de um bebê que nasce em novembro no Nordeste.
+                </p>
+                <p className="font-semibold text-neutral-warm-800 text-base">
+                  Por isso listas prontas raramente funcionam para todas as famílias.
+                </p>
+              </div>
+              <button
+                type="button"
+                id="edu-climate-regional-continue"
+                onClick={() => goTo('twins_q')}
+                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
+              >
+                Continuar
+              </button>
+            </motion.div>
+          )}
+
+          {/* EDU 4 (Muitas famílias compram RN/P...) */}
+          {currentStep === 'edu_size_waste' && (
+            <motion.div
+              key="edu_size_waste"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              className="text-center max-w-md w-full flex flex-col gap-6"
+              id="step-edu-size-waste"
+            >
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80"
+                  alt="Roupas de bebê organizadas"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
                 Você sabia?
@@ -647,14 +839,14 @@ export default function App() {
                 <p>
                   Muitas famílias compram roupas demais nos tamanhos RN e P.
                 </p>
-                <p className="font-semibold text-neutral-warm-800">
-                  Quando percebem, o bebê já cresceu muito rápido e várias peças caríssimas nunca chegaram a ser sequer usadas.
+                <p className="font-semibold text-neutral-warm-800 text-base">
+                  Quando percebem... O bebê cresceu antes mesmo de usar boa parte delas.
                 </p>
               </div>
               <button
                 type="button"
-                id="info-clothes-waste-continue"
-                onClick={() => goTo('info_quantity_waste')}
+                id="edu-size-waste-continue"
+                onClick={() => goTo('concern_q')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -662,34 +854,83 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* FASE 3 - TELA 11 (Você sabia? Desperdício) */}
-          {currentStep === 'info_quantity_waste' && (
+          {/* EDU 5 (Comprar mais não significa...) */}
+          {currentStep === 'edu_buy_right' && (
             <motion.div
-              key="info_quantity_waste"
+              key="edu_buy_right"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               className="text-center max-w-md w-full flex flex-col gap-6"
-              id="step-info-quantity-waste"
+              id="step-edu-buy-right"
             >
-              <div className="w-14 h-14 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-2 font-serif text-2xl font-bold">
-                💸
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80"
+                  alt="Quarto do bebê"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                Você sabia?
+                Comprar mais não significa estar mais preparada.
               </h3>
-              <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
-                <p>
-                  O maior desperdício financeiro no enxoval normalmente não acontece porque falta alguma coisa importante.
-                </p>
-                <p className="font-semibold text-neutral-warm-800">
-                  Ele acontece porque muita gente compra itens de qualidade média na quantidade errada, gerando acúmulo desnecessário.
-                </p>
+              <p className="font-semibold text-neutral-warm-800 text-base leading-relaxed">
+                Comprar certo faz toda a diferença.
+              </p>
+              <button
+                type="button"
+                id="edu-buy-right-continue"
+                onClick={() => goTo('prenatal_organize_q')}
+                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
+              >
+                Continuar
+              </button>
+            </motion.div>
+          )}
+
+          {/* EDU 6 (Um bom planejamento evita...) */}
+          {currentStep === 'edu_planning_benefits' && (
+            <motion.div
+              key="edu_planning_benefits"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              className="max-w-md w-full flex flex-col gap-6"
+              id="step-edu-planning-benefits"
+            >
+              <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  alt="Bebê dormindo calmo"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
+                  💜 Um bom planejamento evita:
+                </h3>
+              </div>
+              <div className="bg-white p-5 rounded-2xl border border-neutral-warm-200/60 shadow-sm space-y-3">
+                {[
+                  'desperdícios',
+                  'compras duplicadas',
+                  'esquecer itens importantes',
+                  'gastos desnecessários',
+                  'estresse na reta final da gestação',
+                  'dúvidas durante as compras'
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-neutral-warm-700">
+                    <span className="text-brand-500 font-bold mt-0.5">✔</span>
+                    <span className="text-sm font-medium">{item}</span>
+                  </div>
+                ))}
               </div>
               <button
                 type="button"
-                id="info-quantity-waste-continue"
-                onClick={() => goTo('concern_q')}
+                id="edu-planning-benefits-continue"
+                onClick={() => goTo('connection_msg')}
                 className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
               >
                 Continuar
@@ -707,8 +948,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-concern-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  alt="Preocupação materna"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 3 — Emoções</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 3 — Emoções</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Qual é sua maior preocupação neste momento?
                 </h2>
@@ -783,8 +1033,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-started-buying-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1596870230551-612f3c517ac0?auto=format&fit=crop&w=600&q=80"
+                  alt="Preparativos enxoval"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 3 — Preparativos</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 3 — Preparativos</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você já começou a comprar itens do enxoval?
                 </h2>
@@ -801,7 +1060,7 @@ export default function App() {
                     type="button"
                     onClick={() => {
                       updateState({ startedBuying: opt.value as any });
-                      goTo('prenatal_organize_q');
+                      goTo('edu_buy_right');
                     }}
                     className="w-full text-left p-4 rounded-2xl border border-neutral-warm-200/80 bg-white hover:border-brand-400 hover:bg-brand-50/30 transition-all font-medium text-sm text-neutral-warm-800 cursor-pointer shadow-sm"
                   >
@@ -822,8 +1081,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-prenatal-organize-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80"
+                  alt="Pré-natal planejado"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 3 — Pré-Natal</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 3 — Pré-Natal</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você costuma organizar seus compromissos do pré-natal?
                 </h2>
@@ -865,8 +1133,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-spending-control-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80"
+                  alt="Controle financeiro"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 3 — Finanças</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 3 — Finanças</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você controla quanto já investiu na gestação?
                 </h2>
@@ -908,8 +1185,17 @@ export default function App() {
               className="w-full max-w-md flex flex-col gap-6"
               id="step-baby-name-q"
             >
+              <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
+                <img
+                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  alt="Nome do bebê"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="space-y-2">
-                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block">Fase 3 — Identidade</span>
+                <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider block font-mono">Fase 3 — Identidade</span>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
                   Você já escolheu o nome do bebê?
                 </h2>
@@ -932,7 +1218,7 @@ export default function App() {
                   <button
                     type="button"
                     id="baby-name-submit"
-                    onClick={() => goTo('connection_msg')}
+                    onClick={() => goTo('edu_planning_benefits')}
                     className="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3.5 px-6 rounded-2xl transition shadow-md text-sm cursor-pointer"
                   >
                     Continuar
@@ -943,7 +1229,7 @@ export default function App() {
                     id="baby-name-skip"
                     onClick={() => {
                       updateState({ babyName: '' });
-                      goTo('connection_msg');
+                      goTo('edu_planning_benefits');
                     }}
                     className="w-full text-center text-xs text-neutral-warm-500 hover:text-brand-600 py-2 font-medium cursor-pointer"
                   >
