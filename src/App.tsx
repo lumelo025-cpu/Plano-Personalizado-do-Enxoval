@@ -192,7 +192,7 @@ export default function App() {
             >
               <div className="w-full h-48 md:h-56 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_16_41.png"
                   alt="Gestante Feliz"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -236,7 +236,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_07_38.png"
                   alt="Ultrassom"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -317,7 +317,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_09_48.png"
                   alt="Preparando o quartinho"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -400,7 +400,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_14_45.png"
                   alt="Bebê dormindo"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -475,7 +475,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1596870230551-612f3c517ac0?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_06_54.png"
                   alt="Detalhes do enxoval"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -542,7 +542,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_08_33.png"
                   alt="Brinquedos infantis"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -595,7 +595,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_09_23.png"
                   alt="Roupas de bebê organizadas"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -650,7 +650,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_10_57.png"
                   alt="Secadora e roupas macias"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -706,7 +706,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_07_41.png"
                   alt="Gestante Feliz"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -746,7 +746,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_11_46.png"
                   alt="Controle financeiro"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -786,7 +786,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1440492248262-689579da82fc?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_11_46.png"
                   alt="Roupas de bebê no cabide"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -826,7 +826,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_13_07.png"
                   alt="Roupas de bebê organizadas"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -866,7 +866,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_17_57.png"
                   alt="Quarto do bebê"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -901,7 +901,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_31_35.png"
                   alt="Bebê dormindo calmo"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -950,7 +950,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_12_40.png"
                   alt="Preocupação materna"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -1035,7 +1035,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1596870230551-612f3c517ac0?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_13_45.png"
                   alt="Preparativos enxoval"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -1083,7 +1083,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_23_01.png"
                   alt="Pré-natal planejado"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -1135,7 +1135,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_27_10.png"
                   alt="Controle financeiro"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -1187,7 +1187,7 @@ export default function App() {
             >
               <div className="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100">
                 <img
-                  src="https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_29_36.png"
                   alt="Nome do bebê"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
