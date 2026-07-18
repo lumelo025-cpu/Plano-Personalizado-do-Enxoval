@@ -9,15 +9,15 @@ interface LoadingScreenProps {
 const LOADING_STEPS = [
   'Identificando estação do nascimento',
   'Calculando quantidade ideal de roupinhas',
+  'Ajustando recomendações ao clima',
   'Identificando possíveis desperdícios',
-  'Ajustando quantidades por clima',
-  'Reduzindo compras desnecessárias',
-  'Organizando o enxoval de forma inteligente',
-  'Adaptando o planejamento para sua rotina',
-  'Preparando calendário do pré-natal',
+  'Eliminando compras desnecessárias',
+  'Organizando enxoval inteligente',
+  'Preparando checklist do pré-natal',
   'Organizando mala maternidade',
-  'Preparando controle financeiro',
-  'Finalizando seu plano personalizado'
+  'Preparando agenda da gestação',
+  'Configurando controle financeiro',
+  'Finalizando seu planejamento'
 ];
 
 export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
@@ -25,7 +25,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   useEffect(() => {
-    // 5.5 seconds total / 11 steps = 500ms per step
+    // Exactly 5 seconds total (400ms * 11 steps = 4.4s, plus 600ms final timeout)
     const interval = setInterval(() => {
       setCompletedSteps(prev => [...prev, activeStepIndex]);
       
@@ -33,12 +33,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         setActiveStepIndex(prev => prev + 1);
       } else {
         clearInterval(interval);
-        // Wait a small moment after the last check is done to transition
         setTimeout(() => {
           onComplete();
         }, 600);
       }
-    }, 500);
+    }, 400);
 
     return () => clearInterval(interval);
   }, [activeStepIndex, onComplete]);

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Thermometer, Box, Sparkles, Check, Lock, ChevronDown, ChevronUp, RefreshCw, Eye, EyeOff, FileText, Baby, Sparkle } from 'lucide-react';
+import { Calendar, Thermometer, Sparkles, Check, Lock, ChevronDown, ChevronUp, FileText, Baby, Sparkle } from 'lucide-react';
 import { FunnelState } from '../types';
 import { getSeason, calculateWeeksRemaining, getClimateInfo } from '../data';
 
@@ -95,15 +95,44 @@ export default function DiagnosisScreen({ state, onNext }: DiagnosisScreenProps)
     >
       {/* Consulting header tag */}
       <div className="text-center mt-2">
-        <span className="text-xs font-semibold uppercase tracking-wider bg-brand-100 text-brand-700 px-3 py-1.5 rounded-full inline-block mb-3 shadow-sm font-mono">
-          Análise Inteligente Concluída ✨
+        <span className="text-xs font-semibold uppercase tracking-wider bg-brand-100 text-brand-700 px-4 py-2 rounded-full inline-block mb-3.5 shadow-sm font-mono">
+          ✨ PLANO PERSONALIZADO CONCLUÍDO
         </span>
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
-          Seu Plano Personalizado está pronto 💜
+          Seu planejamento inteligente está pronto. 💜
         </h2>
-        <p className="text-xs text-neutral-warm-500 mt-2 max-w-sm mx-auto">
-          Nosso algoritmo de inteligência cruza os dados climáticos locais, hábitos de lavanderia e época do parto para projetar suas necessidades de enxoval.
+        <p className="text-xs md:text-sm text-neutral-warm-500 mt-2 max-w-md mx-auto leading-relaxed">
+          Utilizamos suas respostas para montar uma estratégia personalizada para sua gestação.
         </p>
+      </div>
+
+      {/* SPECIAL SAVINGS HIGHLIGHT CARD (ECONOMIA) */}
+      <div className="bg-gradient-to-br from-brand-50 to-brand-100/50 border border-brand-200 rounded-[28px] p-6 shadow-sm relative overflow-hidden flex flex-col gap-4">
+        {/* Sparkle decorative background elements */}
+        <div className="absolute right-3 top-3 opacity-15">
+          <Sparkles className="w-16 h-16 text-brand-600" />
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-200/60 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">💰</span>
+            <h4 className="font-serif text-base font-bold text-neutral-warm-900">
+              Economia estimada
+            </h4>
+          </div>
+          <span className="text-[10px] font-mono tracking-wider font-semibold text-brand-700 bg-white/80 px-2.5 py-1 rounded-full border border-brand-200 self-start sm:self-auto">
+            ✨ Economia Inteligente Calculada
+          </span>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-base font-bold text-brand-800 leading-snug">
+            Você pode economizar até R$ 800 comprando apenas o necessário para o seu bebê.
+          </p>
+          <p className="text-[11px] text-neutral-warm-600 leading-relaxed font-medium">
+            Estimativa baseada na estação do nascimento, clima predominante, frequência de lavagem das roupas e planejamento inteligente do enxoval.
+          </p>
+        </div>
       </div>
 
       {/* Official Consulting Report Layout */}
@@ -172,47 +201,35 @@ export default function DiagnosisScreen({ state, onNext }: DiagnosisScreenProps)
             {summaryText}
           </p>
         </div>
-
-        {/* Brand-new Premium Savings & Avoidance Section */}
-        <div className="border-t border-neutral-warm-100 pt-5 mt-2 space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">💰</span>
-            <h4 className="font-serif text-sm font-bold text-neutral-warm-900">
-              Seu planejamento pode evitar compras desnecessárias
-            </h4>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3">
-            {[
-              {
-                text: `Evitar a compra de até ${stateInfo.isCold ? 16 : 22} peças de roupas que seriam perdidas sem uso (estimativa baseada no seu clima regional)`
-              },
-              {
-                text: 'Economia estimada de até R$ 850,00 apenas em roupinhas desnecessárias'
-              },
-              {
-                text: 'Prevenção contra compras duplicadas de itens que você já possui'
-              },
-              {
-                text: 'Proteção contra a ansiedade de esquecer itens essenciais na mala da maternidade'
-              }
-            ].map((benefit, i) => (
-              <div key={i} className="flex items-start gap-3 bg-brand-50/20 border border-neutral-warm-100/50 p-3 rounded-xl">
-                <span className="text-brand-600 text-sm font-bold mt-0.5">✔</span>
-                <span className="text-xs text-neutral-warm-700 font-medium leading-relaxed">
-                  {benefit.text}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* SECTION 1: FULLY UNLOCKED RN SIZE */}
       <div className="space-y-3" id="unlocked-sections">
+        {/* PLAN CALCULATED INDICATOR (TELA RN REQUIREMENTS) */}
+        <div className="bg-brand-50/50 border border-brand-100 rounded-2xl p-4 flex flex-col gap-3.5 shadow-sm">
+          <div className="flex items-center gap-2 text-brand-800 font-bold text-xs font-serif">
+            <span className="text-base leading-none">🔓</span>
+            <span>Seu plano foi calculado</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="bg-white border border-neutral-warm-100/80 p-2.5 rounded-xl flex flex-col justify-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[9px] text-neutral-warm-400 font-mono block uppercase">Preparados</span>
+              <span className="text-xs font-bold text-brand-700 mt-0.5">97 itens</span>
+            </div>
+            <div className="bg-emerald-50/50 border border-emerald-100/60 p-2.5 rounded-xl flex flex-col justify-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[9px] text-emerald-600 font-mono block uppercase">Liberados</span>
+              <span className="text-xs font-bold text-emerald-700 mt-0.5">20 itens</span>
+            </div>
+            <div className="bg-neutral-warm-50 border border-neutral-warm-100 p-2.5 rounded-xl flex flex-col justify-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[9px] text-neutral-warm-500 font-mono block uppercase">Protegidos</span>
+              <span className="text-xs font-bold text-neutral-warm-600 mt-0.5">77 itens</span>
+            </div>
+          </div>
+        </div>
+
         <div className="flex items-center justify-between px-1">
-          <h4 className="text-xs font-mono font-semibold tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full uppercase flex items-center gap-1.5">
-            <Check className="w-3..5 h-3.5 stroke-[2.5]" />
+          <h4 className="text-[10px] font-mono font-semibold tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full uppercase flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5 stroke-[2.5]" />
             ✔ RECOMENDAÇÃO LIBERADA (Tamanho RN)
           </h4>
           <span className="text-[10px] text-neutral-warm-400 font-mono">100% GRATUITO</span>
@@ -261,9 +278,9 @@ export default function DiagnosisScreen({ state, onNext }: DiagnosisScreenProps)
 
       {/* SECTION 2: LOCKED CATEGORIES & PLANS (STUNNING BLURS AND SKELETONS) */}
       <div className="space-y-3" id="locked-sections">
-        <h4 className="text-xs font-mono font-semibold tracking-wider text-neutral-warm-500 uppercase px-1 flex items-center gap-1.5">
+        <h4 className="text-[10px] font-mono font-semibold tracking-wider text-neutral-warm-500 uppercase px-1 flex items-center gap-1.5">
           <Lock className="w-3.5 h-3.5 text-neutral-warm-400" />
-          Módulos Calculados e Bloqueados no seu Plano
+          Seções Calculadas e Bloqueadas no seu Plano
         </h4>
 
         {[
@@ -291,8 +308,8 @@ export default function DiagnosisScreen({ state, onNext }: DiagnosisScreenProps)
                   <span className="text-xs font-bold text-neutral-warm-800 flex items-center gap-1 block">
                     {locked.title}
                   </span>
-                  <span className="text-[10px] text-neutral-warm-500 block font-mono">
-                    Plano calculado. Desbloqueie para visualizar.
+                  <span className="text-[10px] text-neutral-warm-500 block">
+                    Seu planejamento já está pronto. Desbloqueie para visualizar.
                   </span>
                 </div>
               </div>
@@ -303,9 +320,9 @@ export default function DiagnosisScreen({ state, onNext }: DiagnosisScreenProps)
             </div>
 
             {/* Simulated Blurred Content Row */}
-            <div className="space-y-1.5 opacity-50 select-none pointer-events-none mt-1">
-              <div className="h-3 bg-neutral-warm-100 rounded w-11/12 blur-[1.5px]" />
-              <div className="h-2 bg-neutral-warm-100 rounded w-8/12 blur-[1.5px]" />
+            <div className="space-y-1.5 opacity-30 select-none pointer-events-none mt-1">
+              <div className="h-3 bg-neutral-warm-100 rounded w-11/12 blur-[2px]" />
+              <div className="h-2 bg-neutral-warm-100 rounded w-8/12 blur-[2px]" />
             </div>
           </div>
         ))}

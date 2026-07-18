@@ -86,14 +86,23 @@ export default function App() {
   const canGoBack = history.length > 0 && !['processing', 'diagnosis', 'offer'].includes(currentStep);
 
   // Generate dynamic contextual copy for welcome responses
-  const trimesterMessage = useMemo(() => {
+  const trimesterInfo = useMemo(() => {
     if (state.trimester === 'primeiro') {
-      return 'Excelente momento para começar a organizar tudo com calma. O primeiro trimestre é perfeito para planejar sem a pressão do tempo.';
+      return {
+        title: '💜 Momento perfeito!',
+        text: 'Você está no começo de uma linda jornada. Organizar o enxoval agora dá a você o máximo de tempo e tranquilidade para planejar cada detalhe sem pressa e fazer excelentes escolhas.'
+      };
     }
     if (state.trimester === 'segundo') {
-      return 'A maioria das mães começa a montar o enxoval exatamente nessa fase. Você está no período ideal de disposição física!';
+      return {
+        title: '💜 Excelente notícia!',
+        text: 'Você está exatamente na fase ideal para começar seu enxoval. Isso significa mais tempo para aproveitar promoções, pesquisar com calma e evitar compras por impulso.'
+      };
     }
-    return 'Ainda dá tempo de organizar tudo sem correria. Vamos focar nos itens mais urgentes e fundamentais para a chegada do seu bebê.';
+    return {
+      title: '💜 Momento de foco!',
+      text: 'Apesar de estar na reta final, ainda dá tempo de organizar tudo de forma impecável. Vamos focar no que é verdadeiramente essencial para garantir que você não gaste dinheiro à toa ou sofra com correria.'
+    };
   }, [state.trimester]);
 
   const firstBabyMessage = useMemo(() => {
@@ -200,11 +209,11 @@ export default function App() {
               </div>
               
               <h1 className="font-serif text-3xl md:text-4xl font-bold text-neutral-warm-900 leading-tight">
-                💜 Vamos criar um plano personalizado para a chegada do seu bebê.
+                💜 Descubra quanto você pode economizar no enxoval do seu bebê.
               </h1>
               
               <p className="text-sm md:text-base text-neutral-warm-600 leading-relaxed">
-                Em menos de 2 minutos vamos analisar sua gestação e mostrar exatamente o que faz sentido comprar, organizar e preparar para o seu bebê de forma inteligente.
+                Em menos de 2 minutos vamos calcular um plano totalmente personalizado para evitar desperdícios, compras desnecessárias e ajudar você a organizar toda a sua gestação.
               </p>
 
               <div className="mt-4 flex flex-col gap-3">
@@ -287,12 +296,10 @@ export default function App() {
                 <Heart className="w-5 h-5 fill-brand-200" />
               </div>
               <h3 className="font-serif text-xl md:text-2xl font-bold text-neutral-warm-900 leading-tight">
-                {state.trimester === 'primeiro' && 'Um novo começo...'}
-                {state.trimester === 'segundo' && 'O melhor período!'}
-                {state.trimester === 'terceiro' && 'Reta final!'}
+                {trimesterInfo.title}
               </h3>
               <p className="text-sm md:text-base text-neutral-warm-600 leading-relaxed">
-                {trimesterMessage}
+                {trimesterInfo.text}
               </p>
               <button
                 type="button"
@@ -706,7 +713,7 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_07_41.png"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_07_38.png"
                   alt="Gestante Feliz"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -717,10 +724,13 @@ export default function App() {
               </h3>
               <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
                 <p>
-                  O maior erro na montagem do enxoval não é comprar pouco.
+                  A maioria das famílias compra roupas que o bebê nunca chega a usar.
                 </p>
-                <p className="font-semibold text-neutral-warm-800 text-base">
-                  É comprar sem considerar a realidade do seu bebê.
+                <p className="font-semibold text-neutral-warm-800 text-sm">
+                  Isso acontece porque seguem listas genéricas da internet, sem considerar o clima, a rotina da família e a época do nascimento.
+                </p>
+                <p>
+                  Em poucos minutos vamos calcular exatamente o que faz sentido para o seu bebê.
                 </p>
               </div>
               <button
@@ -753,14 +763,14 @@ export default function App() {
                 />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                💜 Um enxoval inteligente não significa gastar mais.
+                💜 Um bom planejamento reduz gastos.
               </h3>
               <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
                 <p>
-                  Significa comprar apenas aquilo que realmente será utilizado.
+                  Saber exatamente a quantidade e tamanho de cada roupinha impede que você compre por impulso.
                 </p>
                 <p className="font-semibold text-neutral-warm-800">
-                  Isso evita desperdícios e deixa você muito mais tranquila durante toda a gestação.
+                  O planejamento inteligente ajuda seu bolso e garante que o orçamento seja investido no que realmente importa para a saúde e bem-estar da sua família.
                 </p>
               </div>
               <button
@@ -786,21 +796,21 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_11_46.png"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_09_48.png"
                   alt="Roupas de bebê no cabide"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                Você sabia?
+                💜 O enxoval ideal não é o maior. É o mais inteligente.
               </h3>
               <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
                 <p>
-                  Um bebê que nasce em julho no Sul pode precisar de um enxoval completamente diferente de um bebê que nasce em novembro no Nordeste.
+                  Seguir listas genéricas de lojas ou da internet faz você adquirir itens caros que nunca usará.
                 </p>
-                <p className="font-semibold text-neutral-warm-800 text-base">
-                  Por isso listas prontas raramente funcionam para todas as famílias.
+                <p className="font-semibold text-neutral-warm-800">
+                  O verdadeiro enxoval perfeito se adapta ao clima regional e à rotina da sua família, evitando excessos e garantindo total praticidade no dia a dia.
                 </p>
               </div>
               <button
@@ -826,21 +836,21 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_13_07.png"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_07_38.png"
                   alt="Roupas de bebê organizadas"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                Você sabia?
+                💜 Comprar menos pode significar comprar melhor.
               </h3>
               <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
                 <p>
-                  Muitas famílias compram roupas demais nos tamanhos RN e P.
+                  Reduzir o volume de peças permite focar na qualidade dos tecidos — como algodão 100% que protege a pele sensível do bebê e não causa alergias.
                 </p>
-                <p className="font-semibold text-neutral-warm-800 text-base">
-                  Quando percebem... O bebê cresceu antes mesmo de usar boa parte delas.
+                <p className="font-semibold text-neutral-warm-800 text-sm">
+                  Peças de melhor qualidade duram mais, são muito mais fáceis de vestir e trazem real conforto e bem-estar para o seu bebê.
                 </p>
               </div>
               <button
@@ -873,11 +883,16 @@ export default function App() {
                 />
               </div>
               <h3 className="font-serif text-2xl font-bold text-neutral-warm-900 leading-tight">
-                Comprar mais não significa estar mais preparada.
+                💜 Pequenas decisões agora evitam grandes dores de cabeça depois.
               </h3>
-              <p className="font-semibold text-neutral-warm-800 text-base leading-relaxed">
-                Comprar certo faz toda a diferença.
-              </p>
+              <div className="space-y-4 text-sm leading-relaxed text-neutral-warm-600">
+                <p>
+                  Planejar as compras de forma organizada garante que o enxoval esteja completo e limpo semanas antes do parto.
+                </p>
+                <p className="font-semibold text-neutral-warm-800 text-sm">
+                  Menos estresse e correria para você, mais tranquilidade e tempo de qualidade para se conectar com seu bebê na fase mais linda da gestação.
+                </p>
+              </div>
               <button
                 type="button"
                 id="edu-buy-right-continue"

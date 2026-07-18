@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Star, ShieldCheck, Heart, AppWindow, Calendar, DollarSign, Briefcase, ChevronRight, MessageCircle, AlertCircle, Sparkles, X } from 'lucide-react';
+import { Check, Star, ShieldCheck, Heart, AppWindow, Calendar, DollarSign, Briefcase, ChevronRight, MessageCircle, AlertCircle, Sparkles, X, Lock } from 'lucide-react';
 
 interface OfferScreenProps {
   babyName: string;
@@ -11,6 +11,11 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
   const [exitPopupShown, setExitPopupShown] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(37); // Defaults to promotional R$ 37
+
+  // Pre-checkout redirect modal states
+  const [isPreCheckoutOpen, setIsPreCheckoutOpen] = useState(false);
+  const [preCheckoutUrl, setPreCheckoutUrl] = useState('');
+  const [preCheckoutProgress, setPreCheckoutProgress] = useState(0);
 
   const babyTitle = babyName ? babyName.trim() : 'seu bebê';
 
@@ -41,6 +46,30 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
     return () => clearTimeout(timer);
   }, [exitPopupShown]);
 
+  // Handle purchase CTA click - triggers pre-checkout screen
+  const handleCtaClick = (e: React.MouseEvent, checkoutUrl: string) => {
+    e.preventDefault();
+    setPreCheckoutUrl(checkoutUrl);
+    setPreCheckoutProgress(0);
+    setIsPreCheckoutOpen(true);
+  };
+
+  // Pre-checkout simulated loading progress
+  useEffect(() => {
+    if (isPreCheckoutOpen) {
+      const interval = setInterval(() => {
+        setPreCheckoutProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 4; // Reaches 100% in ~2.5 seconds
+        });
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [isPreCheckoutOpen]);
+
   const handleApplyExitDiscount = () => {
     setCurrentPrice(27);
     setIsPopupOpen(false);
@@ -50,18 +79,6 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
       container.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const offerBenefits = [
-    { text: 'Enxoval completo personalizado', desc: 'Indicações de quantidade, materiais e tecidos calculados sob medida para o clima e rotina.' },
-    { text: 'Quantidades por tamanho', desc: 'Tamanho RN, P, M e G planejados de forma inteligente para evitar sobras e falta de roupa.' },
-    { text: 'Checklist completo', desc: 'A lista expandida abrangendo todas as categorias: higiene, passeio, quarto e utilidades.' },
-    { text: 'Agenda', desc: 'Sincronização com o tempo estimado restante da sua gestação para alertas práticos.' },
-    { text: 'Pré-natal', desc: 'Cronograma detalhado de vacinas e exames essenciais trimestre a trimestre.' },
-    { text: 'Controle financeiro', desc: 'Ferramenta inteligente para controle de gastos do enxoval em tempo real.' },
-    { text: 'Mala maternidade', desc: 'Fichas completas para preparar as malas do bebê, da mamãe e do acompanhante.' },
-    { text: 'Atualizações futuras', desc: 'Novos recursos e listas adicionadas que serão liberadas gratuitamente.' },
-    { text: 'Acesso vitalício', desc: 'Sem mensalidades. O plano é seu para sempre, para planejar no seu próprio ritmo.' }
-  ];
 
   const appScreens = {
     enxoval: {
@@ -316,49 +333,272 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
         </div>
       </div>
 
-      {/* Unlocked Benefits list with elegant checkmarks */}
-      <div className="space-y-4">
-        <h4 className="text-xs font-mono font-semibold tracking-wider text-neutral-warm-500 uppercase px-1">
-          O QUE VOCÊ VAI DESBLOQUEAR HOJE:
-        </h4>
+      {/* SEÇÃO PREMIUM: SEU APLICATIVO COMPLETO JÁ ESTÁ PRONTO */}
+      <div className="pt-8 space-y-12">
+        <div className="text-center space-y-3 px-1">
+          <span className="text-[10px] tracking-widest uppercase font-semibold text-brand-600 block font-mono">PLATAFORMA PREMIUM DESBLOQUEADA</span>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-neutral-warm-900 tracking-tight leading-tight">
+            ✨ Seu aplicativo completo já está pronto
+          </h2>
+          <p className="text-xs md:text-sm text-neutral-warm-600 max-w-xl mx-auto leading-relaxed">
+            Ao finalizar seu acesso você desbloqueia uma ferramenta completa para organizar toda a sua gestação, desde o planejamento do enxoval até os últimos dias antes do nascimento.
+          </p>
+        </div>
 
-        <div className="bg-white border border-neutral-warm-100 rounded-2xl divide-y divide-neutral-warm-100 overflow-hidden shadow-md">
-          {offerBenefits.map((benefit, index) => (
-            <div key={index} className="flex items-start gap-3.5 p-4 hover:bg-neutral-warm-50/40 transition">
-              <div className="w-5 h-5 rounded-full bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0 mt-0.5 text-brand-600">
-                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+        {/* SEQUENCE OF CARDS (EXCELLENT CELLPHONE screenshots pairing) */}
+        <div className="space-y-8">
+          {[
+            {
+              icon: "🍼",
+              title: "Enxoval Inteligente",
+              description: "Lista personalizada com as quantidades ideais para a sua realidade.",
+              bullets: ['Roupinhas', 'Banho', 'Higiene', 'Cuidados', 'Passeio', 'Amamentação', 'Quartinho', 'Muito mais'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_11_46.png"
+            },
+            {
+              icon: "📋",
+              title: "Checklist Pré-natal",
+              description: "Organize consultas, exames, vacinas e todas as tarefas importantes de cada trimestre.",
+              bullets: ['Exames', 'Vacinas', 'Médicos', 'Triagens', 'Preparativos', 'Exames de Sangue'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_23_01.png"
+            },
+            {
+              icon: "🧳",
+              title: "Mala da maternidade",
+              description: "Checklist completo da mala do bebê, da mamãe, acompanhante, documentos e bolsa de passeio.",
+              bullets: ['Mala da Mãe', 'Mala do Bebê', 'Mala do Pai', 'Documentação', 'Necessaires', 'Objetos Úteis'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_17_57.png"
+            },
+            {
+              icon: "💰",
+              title: "Controle de gastos",
+              description: "Acompanhe quanto já investiu em cada categoria do enxoval e evite compras repetidas ou desnecessárias.",
+              bullets: ['Limite de Gastos', 'Acompanhamento', 'Economia Real', 'Parcelas', 'Gráficos de Custo'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_27_10.png"
+            },
+            {
+              icon: "📅",
+              title: "Agenda",
+              description: "Nunca mais esqueça exames, consultas, lembretes e compromissos importantes.",
+              bullets: ['Calendário Semanal', 'Compromissos', 'Lembretes de Vacinas', 'Notificações'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_14_45.png"
+            },
+            {
+              icon: "🤰",
+              title: "Minha Gestação",
+              description: "Veja a evolução da gravidez, semanas, desenvolvimento do bebê e quanto falta para o nascimento.",
+              bullets: ['Evolução Semanal', 'Desenvolvimento', 'Estágio do Bebê', 'Sintomas diários'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_07_41.png"
+            },
+            {
+              icon: "📝",
+              title: "Minhas Anotações",
+              description: "Guarde dúvidas para o médico, ideias para o quartinho e tudo o que for importante durante a gestação.",
+              bullets: ['Perguntas ao Pediatra', 'Inspirações de Quartos', 'Dúvidas Obstetra'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_29_36.png"
+            },
+            {
+              icon: "🛍",
+              title: "Onde Comprar",
+              description: "Categorias organizadas para facilitar suas compras e economizar tempo.",
+              bullets: ['Facilidade de Compra', 'Categorização', 'Lojas Próximas', 'Lojas Online Recomendadas'],
+              image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_09_48.png"
+            }
+          ].map((card, idx) => (
+            <div 
+              key={idx}
+              className="bg-white border border-neutral-warm-100/80 rounded-[32px] p-6 sm:p-8 shadow-sm space-y-5 hover:shadow-md transition-all duration-300 relative overflow-hidden text-left"
+            >
+              {/* Card Header */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{card.icon}</span>
+                  <h3 className="text-base font-bold text-neutral-warm-800 font-serif">
+                    {card.title}
+                  </h3>
+                </div>
+                <p className="text-xs text-neutral-warm-500 leading-relaxed font-medium">
+                  {card.description}
+                </p>
+                {card.bullets && (
+                  <div className="flex flex-wrap gap-1.5 pt-1.5">
+                    {card.bullets.map(bullet => (
+                      <span key={bullet} className="text-[9px] font-semibold bg-brand-50 text-brand-700 px-2.5 py-1 rounded-full border border-brand-100/20 shadow-[0_1px_1px_rgba(0,0,0,0.01)]">
+                        ✔ {bullet}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div>
-                <span className="text-xs font-bold text-neutral-warm-800 block leading-tight">
-                  {benefit.text}
-                </span>
-                <span className="text-[11px] text-neutral-warm-500 block leading-relaxed mt-0.5">
-                  {benefit.desc}
-                </span>
+
+              {/* Card Screenshot Frame with subtle drop shadow and curved borders */}
+              <div className="w-full rounded-2xl overflow-hidden border border-neutral-warm-100/40 shadow-sm aspect-[1.3] relative bg-neutral-warm-50/50">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full h-full object-cover hover:scale-[1.01] transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Inconditional Guarantee Quote */}
-      <div className="bg-neutral-warm-50/50 border border-neutral-warm-100 rounded-2xl p-5 italic text-xs text-neutral-warm-600 leading-relaxed max-w-md mx-auto text-center space-y-1">
-        <p>"A melhor decisão da minha gestação! Consegui montar todo o enxoval de forma tranquila. Não comprei nada além do necessário e economizei muito."</p>
-        <span className="text-[10px] uppercase font-mono tracking-wider text-neutral-warm-400 not-italic block mt-1.5">— Mariana G., Mãe da Julia (São Paulo/SP)</span>
+        {/* DESTAQUE: SEU ACESSO DESBLOQUEIA IMEDIATAMENTE (Style layout with elegant white card of Flo-style feel) */}
+        <div className="bg-white border border-neutral-warm-100/80 rounded-[32px] p-8 md:p-10 shadow-sm text-left space-y-6 relative overflow-hidden">
+          <div className="absolute -right-16 -top-16 w-36 h-36 bg-brand-50/40 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-16 w-36 h-36 bg-rose-50/20 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="space-y-1.5 relative z-10">
+            <span className="text-[10px] tracking-widest uppercase font-semibold text-brand-600 block font-mono">TUDO INCLUSO NA PLATAFORMA</span>
+            <h3 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-neutral-warm-900 leading-tight">
+              🔓 Seu acesso desbloqueia imediatamente
+            </h3>
+            <p className="text-xs text-neutral-warm-500 leading-relaxed">
+              Muito mais do que uma lista de enxoval. Você está adquirindo um aplicativo completo para acompanhar toda sua gestação:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3.5 gap-x-4 pt-2 relative z-10">
+            {[
+              "Lista de enxoval inteligente em todas as categorias (quarto, higiene, passeio...)",
+              "Onde comprar cada item de forma otimizada",
+              "97 itens organizados sob medida",
+              "Quantidades personalizadas para seu clima",
+              "Checklist Pré-natal com consultas e exames",
+              "Agenda completa de compromissos",
+              "Controle financeiro integrado de gastos",
+              "Mala maternidade dividida por saquinhos",
+              "Checklist de itens para a mala da mamãe",
+              "Checklist de itens para a mala do acompanhante",
+              "Organização automática por trimestre",
+              "Links e indicações úteis",
+              "Espaço ilimitado para anotações médicas",
+              "Acesso vitalício e livre de assinaturas"
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded-full bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0 text-brand-600 mt-0.5 shadow-sm">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                </div>
+                <span className="text-xs font-semibold text-neutral-warm-700 leading-snug">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* COMPARAÇÃO VISUAL - Outras gestantes vs Gestante Organizada */}
+        <div className="space-y-6 text-center py-4">
+          <div className="space-y-2 px-4">
+            <span className="text-[10px] tracking-widest uppercase font-semibold text-brand-600 block font-mono">PRATICIDADE & SIMPLICIDADE</span>
+            <h3 className="font-serif text-xl md:text-2xl font-bold text-neutral-warm-900 tracking-tight leading-tight">
+              Enquanto outras gestantes precisam usar vários aplicativos...
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left px-1">
+            {/* Outros Column */}
+            <div className="bg-white border border-neutral-warm-100 rounded-3xl p-6 shadow-sm space-y-4">
+              <span className="text-xs font-bold text-neutral-warm-400 uppercase tracking-wider block font-mono">OUTROS MÉTODOS</span>
+              <div className="space-y-3">
+                {[
+                  "Usam papel, blocos de notas ou planilhas difíceis de mexer",
+                  "Esquecem consultas, exames ou vacinas importantes do pré-natal",
+                  "Comprar roupas que o bebê nunca chega a usar por falta de planejamento",
+                  "Sofrem com ansiedade na reta final sem saber o que falta organizar"
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <span className="text-rose-500 font-bold shrink-0 text-sm mt-0.5">❌</span>
+                    <span className="text-xs text-neutral-warm-500 font-semibold leading-relaxed">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Gestante Organizada Column */}
+            <div className="bg-brand-50/50 border-2 border-brand-200 rounded-3xl p-6 shadow-md space-y-5 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute right-0 top-0 w-24 h-24 bg-brand-100/40 rounded-full blur-xl pointer-events-none" />
+              
+              <div className="space-y-4 relative z-10">
+                <span className="text-xs font-bold text-brand-700 uppercase tracking-wider block font-mono">GESTANTE ORGANIZADA</span>
+                <div className="space-y-3">
+                  {[
+                    "Tudo unificado e inteligente em um só lugar no celular",
+                    "Alertas e calendário completo com todas as vacinas e exames",
+                    "Economia real comprando apenas as quantidades certas para o seu clima",
+                    "Tranquilidade de ter saquinhos da maternidade e mala 100% prontos"
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 bg-white/80 p-2.5 rounded-xl border border-brand-100/50 shadow-sm">
+                      <span className="text-brand-600 font-bold shrink-0 text-sm mt-0.5">💜</span>
+                      <span className="text-xs font-bold text-neutral-warm-800 leading-relaxed">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-1 pt-4 border-t border-brand-100/50 relative z-10">
+                <p className="text-xs text-brand-800 font-bold leading-normal">
+                  Mais praticidade. Menos estresse.<br />
+                  Tudo organizado em um só lugar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* TELA DE DESBLOQUEIO PREMIUM (Visual escuro, estilo Apple) */}
+        <div className="bg-neutral-warm-900 text-white rounded-[32px] p-6 md:p-8 shadow-2xl text-left space-y-6 relative overflow-hidden border border-brand-500/30">
+          {/* Subtle colored glow at edges */}
+          <div className="absolute top-0 right-0 w-48 h-48 bg-brand-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="absolute right-0 top-0 bg-brand-600 text-white font-mono text-[9px] font-bold px-3 py-1.5 rounded-bl-2xl tracking-widest uppercase">
+            SISTEMA INTEGRADO
+          </div>
+
+          <div className="space-y-1 relative z-10">
+            <span className="text-[9px] tracking-widest uppercase font-semibold text-brand-300 block font-mono">DESBLOQUEIO INSTANTÂNEO</span>
+            <h3 className="font-serif text-xl md:text-2xl font-bold text-white leading-tight">
+              💜 Hoje você está desbloqueando um aplicativo que vai acompanhar toda a sua gestação.
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2 relative z-10">
+            {[
+              { label: "🍼 97 itens organizados", desc: "Enxoval personalizado por tamanhos" },
+              { label: "📋 Mais de 70 tarefas de pré-natal", desc: "Cronograma de vacinas e exames" },
+              { label: "🧳 5 checklists de malas prontos", desc: "Bebê, mãe e acompanhante preparados" }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white/[0.08] border border-white/15 rounded-2xl p-4 flex flex-col justify-between gap-1 shadow-inner hover:bg-white/15 transition-colors">
+                <span className="text-xs font-bold text-white leading-snug">{item.label}</span>
+                <span className="text-[10px] text-neutral-warm-100 font-medium">{item.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-2 pt-4 border-t border-white/15 relative z-10">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">♾️</span>
+              <span className="text-xs font-bold text-brand-300">Acesso vitalício</span>
+            </div>
+            <p className="text-[11px] text-neutral-warm-100 leading-normal">
+              Sem assinaturas recorrentes ou mensalidades futuras. Pague uma única vez e tenha acesso a todas as atualizações e novidades que lançarmos para sempre.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Pricing and Purchase Box */}
       <div 
         id="price-buy-container"
-        className="bg-white border-2 border-brand-100/80 rounded-3xl p-6 md:p-8 shadow-lg text-center space-y-5 relative overflow-hidden"
+        className="bg-white border-2 border-brand-100/80 rounded-[32px] p-6 md:p-8 shadow-xl text-center space-y-5 relative overflow-hidden"
       >
         {/* Soft subtle tag */}
         <div className="absolute top-0 inset-x-0 bg-brand-50 border-b border-brand-100/50 py-1.5 text-[10px] font-mono font-semibold text-brand-700 uppercase tracking-widest">
-          Condição especial de análise ativa
+          💎 ACESSO PREMIUM VITALÍCIO
         </div>
 
-        <div className="pt-5">
-          <span className="text-[10px] tracking-widest uppercase font-semibold text-neutral-warm-400 block font-mono">ACESSO VITALÍCIO IMEDIATO</span>
+        <div className="pt-6">
+          <span className="text-[10px] tracking-widest uppercase font-semibold text-neutral-warm-400 block font-mono">PAGAMENTO ÚNICO • SEM MENSALIDADE</span>
           
           <div className="flex items-baseline justify-center gap-2 mt-2">
             <span className="text-xs font-semibold text-neutral-warm-400 line-through">R$ 47,00</span>
@@ -370,24 +610,38 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
           </span>
         </div>
 
-        {/* Elegant Pre-Button Highlight */}
-        <p className="text-xs text-brand-700 font-medium bg-brand-50/50 py-3 px-4 rounded-xl border border-brand-100/40">
-          ✨ Se você evitar a compra de apenas uma roupinha desnecessária, você já recupera todo o seu investimento no plano.
-        </p>
+        {/* Highlights List */}
+        <div className="space-y-1.5 py-2 px-4 rounded-2xl bg-neutral-warm-50 border border-neutral-warm-100 text-left">
+          {[
+            "Sem mensalidade ou taxas ocultas",
+            "Atualizações gratuitas vitalícias",
+            "Garantia incondicional de 7 dias",
+            "Acesso imediato após confirmação do pagamento"
+          ].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2 text-xs text-neutral-warm-600">
+              <Check className="w-3.5 h-3.5 text-brand-500 shrink-0" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
 
-        {/* Main CTA button */}
-        <motion.a
-          id="cta-buy-access-button"
-          href={currentPrice === 27 ? "https://pay.kiwify.com.br/KtkK89u" : "https://pay.kiwify.com.br/1j4MNX7"}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition shadow-xl shadow-brand-600/20 text-sm flex items-center justify-center gap-2 cursor-pointer relative overflow-hidden no-underline"
-        >
-          <span>Quero desbloquear meu plano completo 💜</span>
-          <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-        </motion.a>
+        {/* Main CTA button showing application unlock */}
+        <div className="space-y-2">
+          <motion.button
+            id="cta-buy-access-button"
+            onClick={(e) => handleCtaClick(e, currentPrice === 27 ? "https://pay.kiwify.com.br/KtkK89u" : "https://pay.kiwify.com.br/1j4MNX7")}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition shadow-xl shadow-brand-600/20 text-sm flex items-center justify-center gap-2 cursor-pointer relative overflow-hidden"
+          >
+            <span>Quero liberar meu aplicativo completo 💜</span>
+            <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+          </motion.button>
+          
+          <span className="text-[10px] text-neutral-warm-500 font-medium block">
+            🔒 Oferta exclusiva deste diagnóstico. Após sair desta página ela poderá não estar mais disponível.
+          </span>
+        </div>
 
         {/* Security and 7-day guarantee details */}
         <div className="pt-4 border-t border-neutral-warm-100 grid grid-cols-2 gap-4">
@@ -402,7 +656,7 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
             <MessageCircle className="w-5 h-5 text-brand-500 shrink-0" />
             <div className="text-left">
               <span className="text-[10px] text-neutral-warm-800 font-bold block leading-tight">Suporte Premium</span>
-              <span className="text-[9px] text-neutral-warm-500 block">Auxílio das consultoras</span>
+              <span className="text-[9px] text-neutral-warm-500 block">Dúvidas por e-mail</span>
             </div>
           </div>
         </div>
@@ -468,20 +722,18 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
                 Ao fechar esta janela ela poderá não estar mais disponível.
               </p>
 
-              {/* Action Buttons */}
+              {/* Action Buttons with pre-checkout redirect */}
               <div className="flex flex-col gap-2.5">
-                <a
+                <button
                   id="exit-popup-accept"
-                  href="https://pay.kiwify.com.br/KtkK89u"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
+                  onClick={(e) => {
+                    handleCtaClick(e, "https://pay.kiwify.com.br/KtkK89u");
                     handleApplyExitDiscount();
                   }}
-                  className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition shadow-lg shadow-brand-600/15 cursor-pointer block no-underline"
+                  className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition shadow-lg shadow-brand-600/15 cursor-pointer block"
                 >
                   Quero garantir meu acesso por R$27
-                </a>
+                </button>
                 <button
                   type="button"
                   id="exit-popup-decline"
@@ -491,6 +743,78 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
                   Continuar navegando
                 </button>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* PRE-CHECKOUT TRANSITION OVERLAY (Friction Screen) */}
+      <AnimatePresence>
+        {isPreCheckoutOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-hidden" id="pre-checkout-overlay">
+            {/* Dark glassmorphism backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-neutral-warm-950/85 backdrop-blur-lg"
+            />
+
+            {/* Premium pre-checkout card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', duration: 0.4 }}
+              className="bg-white border border-brand-100 rounded-[32px] p-6 md:p-8 max-w-md w-full shadow-2xl relative z-10 text-center space-y-6"
+            >
+              {/* Star decorative badge */}
+              <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                <Sparkles className="w-7 h-7" />
+              </div>
+
+              <div className="space-y-3.5">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold text-neutral-warm-900 leading-tight">
+                  🎉 Parabéns!
+                </h3>
+                <p className="text-sm text-neutral-warm-600 leading-relaxed">
+                  Seu planejamento foi preparado com sucesso.
+                </p>
+                <p className="text-xs text-neutral-warm-500 leading-relaxed">
+                  Reservamos seu acesso pelos próximos <span className="font-bold text-brand-700">15 minutos</span>. Conclua seu acesso agora para desbloquear todas as funcionalidades.
+                </p>
+              </div>
+
+              {/* Progress loader visual */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center text-[10px] text-neutral-warm-400 font-mono">
+                  <span>PREPARANDO AMBIENTE SEGURO...</span>
+                  <span>{preCheckoutProgress}%</span>
+                </div>
+                <div className="w-full h-2 bg-neutral-warm-100 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-brand-600 rounded-full"
+                    style={{ width: `${preCheckoutProgress}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <motion.button
+                id="pre-checkout-continue-button"
+                onClick={() => {
+                  window.location.href = preCheckoutUrl;
+                }}
+                disabled={preCheckoutProgress < 100}
+                className={`w-full py-4 px-6 rounded-2xl font-bold text-xs transition-all flex items-center justify-center gap-2 ${
+                  preCheckoutProgress >= 100
+                    ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-lg shadow-brand-600/15 cursor-pointer'
+                    : 'bg-neutral-warm-100 text-neutral-warm-400 cursor-not-allowed'
+                }`}
+              >
+                <span>Continuar</span>
+                <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+              </motion.button>
             </motion.div>
           </div>
         )}
