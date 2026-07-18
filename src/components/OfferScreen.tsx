@@ -376,19 +376,18 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
         </p>
 
         {/* Main CTA button */}
-        <motion.button
-          type="button"
+        <motion.a
           id="cta-buy-access-button"
+          href={currentPrice === 27 ? "https://pay.kiwify.com.br/KtkK89u" : "https://pay.kiwify.com.br/1j4MNX7"}
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
-          onClick={() => {
-            alert(`Sua compra de R$ ${currentPrice},00 foi processada com sucesso na simulação! Parabéns pelo seu Plano Personalizado do Gestante Organizada 💜`);
-          }}
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition shadow-xl shadow-brand-600/20 text-sm flex items-center justify-center gap-2 cursor-pointer relative overflow-hidden"
+          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-2xl transition shadow-xl shadow-brand-600/20 text-sm flex items-center justify-center gap-2 cursor-pointer relative overflow-hidden no-underline"
         >
           <span>Quero desbloquear meu plano completo 💜</span>
           <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-        </motion.button>
+        </motion.a>
 
         {/* Security and 7-day guarantee details */}
         <div className="pt-4 border-t border-neutral-warm-100 grid grid-cols-2 gap-4">
@@ -471,14 +470,18 @@ export default function OfferScreen({ babyName }: OfferScreenProps) {
 
               {/* Action Buttons */}
               <div className="flex flex-col gap-2.5">
-                <button
-                  type="button"
+                <a
                   id="exit-popup-accept"
-                  onClick={handleApplyExitDiscount}
-                  className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition shadow-lg shadow-brand-600/15 cursor-pointer"
+                  href="https://pay.kiwify.com.br/KtkK89u"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleApplyExitDiscount();
+                  }}
+                  className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition shadow-lg shadow-brand-600/15 cursor-pointer block no-underline"
                 >
                   Quero garantir meu acesso por R$27
-                </button>
+                </a>
                 <button
                   type="button"
                   id="exit-popup-decline"
