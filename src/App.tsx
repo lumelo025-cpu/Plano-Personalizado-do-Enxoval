@@ -713,8 +713,8 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_07_38.png"
-                  alt="Gestante Feliz"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_07_41.png"
+                  alt="Gestação em evolução"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -796,8 +796,8 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_09_48.png"
-                  alt="Roupas de bebê no cabide"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_13_45.png"
+                  alt="Roupas de bebê inteligentes"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -836,8 +836,8 @@ export default function App() {
             >
               <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-neutral-warm-100 mb-2">
                 <img
-                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_07_38.png"
-                  alt="Roupas de bebê organizadas"
+                  src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_17_57.png"
+                  alt="Quarto do bebê aconchegante"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
