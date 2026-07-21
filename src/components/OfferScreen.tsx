@@ -108,17 +108,7 @@ export default function OfferScreen({ state }: OfferScreenProps) {
     };
   }, [exitPopupShown]);
 
-  // Mobile fallback exit intent (trigger after 15 seconds)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!exitPopupShown) {
-        setExitPopupShown(true);
-        setIsPopupOpen(true);
-      }
-    }, 15000); // 15 seconds
 
-    return () => clearTimeout(timer);
-  }, [exitPopupShown]);
 
   // Handle purchase CTA click - triggers pre-checkout screen
   const handleCtaClick = (e: React.MouseEvent, checkoutUrl: string) => {
@@ -393,91 +383,17 @@ export default function OfferScreen({ state }: OfferScreenProps) {
           </p>
         </div>
 
-        {/* Horizontal sliding App Store style gallery */}
-        <div className="w-full relative">
-          <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-brand-200 scrollbar-track-transparent px-1">
-            {[
-              {
-                icon: "🍼",
-                title: "Enxoval Inteligente",
-                phrase: "Lista personalizada para sua realidade.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_11_46.png"
-              },
-              {
-                icon: "📋",
-                title: "Checklist Pré-natal",
-                phrase: "Consultas, exames e tarefas organizadas.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_23_01.png"
-              },
-              {
-                icon: "🧳",
-                title: "Mala maternidade",
-                phrase: "Tudo separado para bebê, mamãe e acompanhante.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_17_57.png"
-              },
-              {
-                icon: "💰",
-                title: "Controle financeiro",
-                phrase: "Acompanhe todos os gastos do enxoval.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_27_10.png"
-              },
-              {
-                icon: "📅",
-                title: "Agenda",
-                phrase: "Nunca mais esqueça consultas ou exames.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_14_45.png"
-              },
-              {
-                icon: "🤰",
-                title: "Minha Gestação",
-                phrase: "Acompanhe cada semana da gravidez.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_07_41.png"
-              },
-              {
-                icon: "📝",
-                title: "Anotações",
-                phrase: "Tudo importante salvo em um único lugar.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-17-de-jul.-de-2026-21_29_36.png"
-              },
-              {
-                icon: "🛍",
-                title: "Onde Comprar",
-                phrase: "Compras organizadas por categoria.",
-                image: "https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-9-de-jul.-de-2026-11_09_48.png"
-              }
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className="w-[82vw] sm:w-[300px] shrink-0 snap-center bg-white border border-neutral-warm-200/80 rounded-3xl p-4 shadow-sm flex flex-col justify-between hover:shadow-md transition-all duration-300 text-left relative overflow-hidden"
-              >
-                <div className="space-y-1.5 mb-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-lg">{card.icon}</span>
-                    <h3 className="text-xs font-bold text-neutral-warm-800 font-serif">
-                      {card.title}
-                    </h3>
-                  </div>
-                  <p className="text-[11px] text-neutral-warm-500 font-semibold leading-relaxed">
-                    {card.phrase}
-                  </p>
-                </div>
-
-                <div className="w-full rounded-2xl overflow-hidden border border-neutral-warm-100/60 shadow-sm aspect-[1.3] relative bg-neutral-warm-50/50">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Subtle swipe indicator */}
-          <div className="flex items-center justify-center gap-1 text-[10px] text-neutral-warm-400 font-semibold animate-pulse mt-1">
-            <span>← Arraste para o lado para ver mais telas →</span>
-          </div>
+        {/* Banner do aplicativo completo e personalizado */}
+        <div className="w-full rounded-3xl overflow-hidden border border-neutral-warm-200/60 shadow-sm relative bg-neutral-warm-50">
+          <img
+            src="https://site.maecompleta.com/wp-content/uploads/2026/07/ChatGPT-Image-20-de-jul.-de-2026-23_25_23.png"
+            alt="Seu aplicativo completo e personalizado"
+            className="w-full h-auto object-cover"
+            referrerPolicy="no-referrer"
+          />
         </div>
+
+
 
         {/* ONE card: 🔓 O que você desbloqueia hoje (grade 2x6) */}
         <div className="bg-white border border-neutral-warm-200 rounded-3xl p-6 text-left space-y-4 shadow-sm">
