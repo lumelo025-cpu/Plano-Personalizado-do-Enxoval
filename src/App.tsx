@@ -1262,17 +1262,12 @@ export default function App() {
 
           {/* FASE 5 - TELA 18 (Loading Screen) */}
           {currentStep === 'processing' && (
-            <LoadingScreen onComplete={() => goTo('diagnosis')} />
-          )}
-
-          {/* FASE 6 - TELA 19 (O Diagnóstico inteligente) */}
-          {currentStep === 'diagnosis' && (
-            <DiagnosisScreen state={state} onNext={() => goTo('offer')} />
+            <LoadingScreen onComplete={() => goTo('offer')} />
           )}
 
           {/* FASE 7 - TELA 20 (A Oferta) */}
           {currentStep === 'offer' && (
-            <OfferScreen babyName={state.babyName} />
+            <OfferScreen state={state} />
           )}
 
         </AnimatePresence>
